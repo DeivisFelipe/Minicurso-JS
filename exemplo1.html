@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Página de exemplo</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+
+    <h1>Digite o seu nome:</h1>
+    <input type="text" id="nome" />
+    <button onclick="mostraNome()">Mostrar nome</button>
+
+    <script>
+        function mostraNome() {
+            const nome = document.getElementById('nome').value
+            alert(`Olá, ${nome}!`)
+        }
+    </script>
+</body>
+
+</html>

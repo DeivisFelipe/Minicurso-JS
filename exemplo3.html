@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exemplo 3</title>
+</head>
+
+<body>
+    <h1>Lista de pessoas</h1>
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="text" id="idade" placeholder="Idade">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="lista"></ul>
+
+    <script>
+        class Pessoa {
+            constructor(nome, idade) {
+                this.nome = nome;
+                this.idade = idade;
+            }
+        }
+
+        const pessoas = [];
+
+        function adicionar() {
+            const nome = document.getElementById('nome').value
+            const idade = document.getElementById('idade').value
+            const pessoa = new Pessoa(nome, idade)
+            pessoas.push(pessoa)
+
+            atualizarLista()
+        }
+
+        function atualizarLista() {
+            const lista = document.getElementById('lista')
+            lista.innerHTML = '' // Limpa a lista
+            pessoas.forEach(pessoa => {
+                const item = document.createElement('li')
+                item.textContent = `${pessoa.nome} - ${pessoa.idade} anos`
+                lista.appendChild(item)
+            })
+        }
+    </script>
+</body>
+
+</html>
