@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #shopping-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .item {
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            max-width: 400px;
+        }
+
+        .item span {
+            margin: 10px;
+            flex-grow: 1;
+        }
+
+        .item button {
+            margin-right: 10px;
+            margin-left: 5px;
+            padding: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lista de Compras</h1>
+
+    <input type="text" id="input" placeholder="Digite o nome do item">
+    <button onclick="addItem()">Adicionar Item</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+        function addItem() {
+            // encontra o elemento Input e seu valor
+            const itemInput = document.getElementById('input');
+            const itemText = itemInput.value;
+
+            if (itemText.trim() !== '') {
+                // cria um elemento <li>
+                const li = document.createElement('li');
+                li.classList.add('item');
+
+                // cria um elemento <span>
+                const span = document.createElement('span');
+                span.textContent = itemText;
+
+                // anexa o elemento <span> ao <li>
+                li.appendChild(span);
+
+                // cria um elemento <select>
+                const colorSelect = document.createElement('select');
+
+                const colors = {
+                    "White": "rgb(255, 255, 255)",
+                    "Red": "rgb(255, 0, 0)",
+                    "Green": "rgb(0, 255, 0)",
+                    "Blue": "rgb(0, 0, 255)",
+                    "Yellow": "rgb(255, 255, 0)",
+                    "Cyan": "rgb(0, 255, 255)",
+                    "Magenta": "rgb(255, 0, 255)",
+                    "Gray": "rgb(128, 128, 128)"
+                };
+
+                for (const [name, color] of Object.entries(colors)) {
+                    // para cada cor, cria um elemento <option>
+                    const option = document.createElement('option');
+                    option.value = color;
+                    option.textContent = name;
+                    
+                    // e anexa ao <select>
+                    colorSelect.appendChild(option);
+                }
+
+                // anexa o <select> ao <li>
+                li.appendChild(colorSelect);
+
+                // eventListener para mudar a cor
+                colorSelect.addEventListener('change', () => {
+                    li.style.backgroundColor = colorSelect.value;
+                });
+
+                // botão de excluir 
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Apagar';
+
+                removeButton.addEventListener('click', () => {
+                    // li.remove();
+                    li.parentElement.removeChild(li);
+                });
+
+                li.appendChild(removeButton);
+
+                document.getElementById('lista').appendChild(li);
+
+                itemInput.value = '';
+            }
+        }
+    </script>
+
+</body>
+</html>

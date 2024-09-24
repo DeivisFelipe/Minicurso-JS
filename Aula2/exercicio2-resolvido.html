@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício Aula 2</title>
+  </head>
+  <body>
+
+    <h1>Visualizador de Cor</h1>
+
+    <div>
+      <label for="colorHex">Digite o HEX da cor: <b>#</b></label>
+      <input type="text" name="colorHex" id="colorHex" maxlength="7">
+      <button>Trocar cor</button>
+    </div>
+    <br/>
+    <div id="canva" style="border: solid 1px; border-radius: 5px; width: 200px; height: 50px;">
+  
+    </div>
+    <script>
+      const canva = document.getElementById('canva');
+      const input = document.querySelector('input');
+      const button = document.querySelector('button');    
+
+      button.addEventListener('click', () => {
+        const cor = input.value;
+        input.value = '';
+
+        canva.style.backgroundColor = '#' + cor;
+      });
+    </script>
+  </body>
+</html>
