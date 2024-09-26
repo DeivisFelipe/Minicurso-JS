@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.1s;
+            background-color: #007bff;
+            color: white;
+        }
+        #output {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+        button:hover {
+            border:#007bff solid 2px;
+            background-color: #ffffff;
+            color: rgb(5, 5, 5);
+        }
+    </style>
+</head>
+<body>
+
+<h1>Eventos</h1>
+
+<button id="btn">Botão</button>
+<input type="text" id="input" placeholder="Input"> <br/><br/>
+
+<div id="output">Event output will appear here</div>
+
+<script>
+    const events = [];
+
+    const atualizaOutput = () => {
+        if (events.length > 5) events.shift();
+        document.getElementById('output').innerText = events.join('\n\n'); 
+    };
+
+    // Click event
+    document.getElementById('btn').addEventListener('click', function(e) {
+        events.push('Botão Clicado!');
+        atualizaOutput();
+    });
+
+    // Double click event
+    document.getElementById('btn').addEventListener('dblclick', function(e) {
+        events.push('Clique duplo!');
+        atualizaOutput();
+    });
+
+    // Mouse over event
+    document.getElementById('btn').addEventListener('mouseover', function(e) {
+        events.push('Mouse em cima do botão');
+        atualizaOutput();
+    });
+
+    // Mouse out event
+    document.getElementById('btn').addEventListener('mouseout', function(e) {
+        events.push('Mouse saiu do botão');
+        atualizaOutput();
+    });
+
+    // Keypress event
+    document.getElementById('input').addEventListener('keypress', function(e) {
+        events.push(`Tecla pressionada: ${e.key}`);
+        atualizaOutput();
+    });
+
+
+    document.getElementById('input').addEventListener('focus', function(e) {
+        events.push(`Input focalizado`);
+        atualizaOutput();
+    });
+
+    document.getElementById('input').addEventListener('blur', function(e) {
+        events.push(`Input saiu do foco`);
+        atualizaOutput();
+    });
+</script>
+
+</body>
+</html>

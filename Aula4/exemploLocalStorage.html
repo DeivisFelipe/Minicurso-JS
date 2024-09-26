@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo localStorage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        #greeting {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Exemplo localStorage</h1>
+
+<input type="text" id="nome" placeholder="Digite seu nome">
+<button id="rememberBtn">Remember The Name</button><br/>
+<button id="forgetBtn">I am no one</button>
+
+<div id="greeting">Hello, I cannot remember your name...</div>
+
+<script>
+    function updateGreeting() {
+        const storedName = localStorage.getItem('nome');
+
+        const greetingElement = document.getElementById('greeting');
+        if (storedName) {
+            greetingElement.innerText = `Hello, ${storedName}. I remember you!`;
+        } else {
+            greetingElement.innerText = 'Hello, I do not remember you...';
+        }
+    }
+
+    updateGreeting();
+
+    document.getElementById('rememberBtn').addEventListener('click', function() {
+        const nome = document.getElementById('nome').value;
+
+        if (nome.trim()) {
+            localStorage.setItem('nome', nome.trim());
+            updateGreeting();
+        }
+    });
+
+    document.getElementById('forgetBtn').addEventListener('click', function() {
+        localStorage.removeItem('nome');
+        updateGreeting();
+    });
+</script>
+
+</body>
+</html>
