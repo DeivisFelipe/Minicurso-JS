@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo Fetch</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 20px;
+      width: 400px;
+      text-align: center;
+    }
+
+    #fetchButton {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #fetchButton:hover {
+      background-color: #0056b3;
+    }
+
+    #output {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .data-item {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Exemplo de Fetch</h2>
+    <button id="fetchButton">Chamar API</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const url = 'https://uselessfacts.jsph.pl/api/v2/facts/random';
+
+    const button = document.getElementById('fetchButton');
+    const outputDiv = document.getElementById('output');
+
+    button.addEventListener('click', () => {
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          outputDiv.innerHTML = `<p class="data-item">${data.text}</p>`;
+          console.log(data);
+        })
+        .catch(e => {
+          outputDiv.innerHTML = `<p style="color: red;">Erro: ${e.message}</p>`;
+        });
+    });
+    
+  </script>
+</body>
+</html>
